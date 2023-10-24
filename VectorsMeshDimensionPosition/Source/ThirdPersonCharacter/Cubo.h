@@ -32,6 +32,10 @@ public:
 		float deltaMov;
 	UPROPERTY(EditAnyWhere)
 		float deltaRot;
-	//UPROPERTY(EditAnyWhere)
+	UPROPERTY(EditAnyWhere)
 		float deltaScale;
+
+	UPROPERTY(EditAnyWhere)
+		FVector TargetPoint;
+
 };

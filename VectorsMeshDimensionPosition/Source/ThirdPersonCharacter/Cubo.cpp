@@ -18,12 +18,19 @@ ACubo::ACubo()
 	deltaMov = 0.5;
 	deltaScale = 1.005;
 	deltaRot = 1;
+
+	
 }
 
 // Called when the game starts or when spawned
 void ACubo::BeginPlay()
 {
 	Super::BeginPlay();
+	UE_LOG(LogActor, Warning, TEXT("Initial Rotation of Actor %s"), *this->GetActorRotation().ToString());
+	SetActorRotation(FRotator(0, 45, 0));
+	UE_LOG(LogActor, Warning, TEXT("Updated Rotation of Actor %s"), *this->GetActorRotation().ToString());
+	//FRotator CurrentRotation = GetActorRotation();
+	//CurrentRotation.Pitch, CurrentRotation.Yaw + deltaRot, CurrentRotation.Roll	
 	
 }
 
@@ -37,9 +44,21 @@ void ACubo::Tick(float DeltaTime)
 
 	//SetActorLocation(FVector(1, 1, 1));
 	FVector previusLocation = GetActorLocation();
-	previusLocation.Y += deltaMov;
-	//previusLocation.Y = previusLocation.Y + 0.1;
-	SetActorLocation(previusLocation);
 
+	/*+180
+	-300*/
+
+	//if (previusLocation.Y >= 180)
+	//	deltaMov *= -1;
+	//if (previusLocation.Y <= -300)
+	//	deltaMov *= -1;
+	//previusLocation.Y += deltaMov;
+	////previusLocation.Y = previusLocation.Y + 0.1;
+	//SetActorLocation(previusLocation);
+
+
+	FRotator CurrentRotation = GetActorRotation();
+	FRotator NewRotation = FRotator(CurrentRotation.Pitch, CurrentRotation.Yaw + deltaRot, CurrentRotation.Roll );
+	SetActorRotation(NewRotation);
 }
 

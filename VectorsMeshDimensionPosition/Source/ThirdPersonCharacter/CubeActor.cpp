@@ -3,6 +3,9 @@
 
 #include "CubeActor.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "ThirdPersonCharacterCharacter.h"
+
 // Sets default values
 ACubeActor::ACubeActor()
 {
@@ -23,6 +26,11 @@ void ACubeActor::BeginPlay()
 	UE_LOG(LogActor, Warning, TEXT("Hello world from %s"), *this->GetName());
 	//UE_LOG(LogActor, Warning, TEXT("Position actor %d %d %d"), this->GetActorLocation().X, this->GetActorLocation().Y, this->GetActorLocation().Z);
 	UE_LOG(LogActor, Warning, TEXT("Position of Actor %s"), *this->GetActorLocation().ToString() );
+
+	currentLocation = malla->GetRelativeLocation();
+	//currentLocation = malla->GetRelativeTransform()->GetLocation();
+
+	 //UGameplayStatics::GetActorOfClass((), AThirdPersonCharacterCharacter::StaticClass());
 }
 
 // Called every frame
@@ -33,5 +41,11 @@ void ACubeActor::Tick(float DeltaTime)
 	FVector previuScale = this->GetActorRelativeScale3D();  // malla->GetRelativeScale3D();
 	this->SetActorRelativeScale3D (previuScale*1.0005f);
 	//this->SetActorRelativeRotation(FVector(1, 2, 3));
+
+	float distance = this->GetDistanceTo(player);
+	FVector newLocation = currentLocation;
+	if (distance < 50)
+		newLocation.Z += 80;
+	malla->SetRelativeLocation(newLocation);
 }
 

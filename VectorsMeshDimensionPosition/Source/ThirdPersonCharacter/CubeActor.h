@@ -27,4 +27,10 @@ public:
 
 	UPROPERTY(EditAnyWhere)
 	UStaticMeshComponent* malla;
+
+	UPROPERTY(EditAnyWhere)
+		AActor* player;
+private:
+	FVector currentLocation;
+
 };
