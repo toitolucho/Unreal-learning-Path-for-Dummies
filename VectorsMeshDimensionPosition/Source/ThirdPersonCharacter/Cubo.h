@@ -18,7 +18,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	void moverHacia(float DeltaTime);
+	void escalarHacia(float DeltaTime);
+	void Rotarhacia(float DeltaTime);
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -36,6 +38,19 @@ public:
 		float deltaScale;
 
 	UPROPERTY(EditAnyWhere)
-		FVector TargetPoint;
+		FVector TargetPoint1;
+	UPROPERTY(EditAnyWhere)
+		FVector TargetPoint2;
+	
+	FVector CurrentTargetPoint;
+	bool toTarget2 = true;
+
+	UPROPERTY(EditAnywhere)
+		TArray<UStaticMesh*> StaticMeshes;
+
+	UPROPERTY(EditAnywhere)
+		int MeshType;
+	UPROPERTY(EditAnywhere)
+		int ActionType;
 
 };

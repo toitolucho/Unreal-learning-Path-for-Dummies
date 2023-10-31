@@ -5,6 +5,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "ThirdPersonCharacterCharacter.h"
+#include "UObject/ConstructorHelpers.h"
 
 // Sets default values
 ACubeActor::ACubeActor()
@@ -31,6 +32,11 @@ void ACubeActor::BeginPlay()
 	//currentLocation = malla->GetRelativeTransform()->GetLocation();
 
 	 //UGameplayStatics::GetActorOfClass((), AThirdPersonCharacterCharacter::StaticClass());
+
+	//ConstructorHelpers::FObjectFinderOptional<UStaticMesh> PlaneMesh(TEXT("/Game/StarterContent/Shapes/Shape_Cone.PuzzleCube"));
+	UStaticMesh* meshToUse = Cast<UStaticMesh>(StaticLoadObject(UStaticMesh::StaticClass(), NULL, TEXT("/Game/StarterContent/Shapes/Shape_Cone.PuzzleCube")));
+	if(meshToUse)
+		malla->SetStaticMesh(meshToUse);
 }
 
 // Called every frame
