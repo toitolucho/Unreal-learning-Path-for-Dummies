@@ -88,3 +88,12 @@ void AThirdPersonCharacterCharacter::Tick(float DeltaSeconds)
 		}
 	}
 }
+
+void AThirdPersonCharacterCharacter::levantarBloques()
+{
+	for (auto& cubo : listaCubos)
+	{
+		UE_LOG(LogActor, Warning, TEXT("cubos"));
+		cubo->iniciarMovimiento();
+	}	
+}

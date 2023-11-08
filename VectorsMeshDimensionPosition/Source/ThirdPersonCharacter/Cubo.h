@@ -14,6 +14,7 @@ class THIRDPERSONCHARACTER_API ACubo : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ACubo();
+	void iniciarMovimiento();
 
 protected:
 	// Called when the game starts or when spawned
@@ -44,6 +45,7 @@ public:
 	
 	FVector CurrentTargetPoint;
 	bool toTarget2 = true;
+	bool enabled = false;
 
 	UPROPERTY(EditAnywhere)
 		TArray<UStaticMesh*> StaticMeshes;
@@ -52,5 +54,6 @@ public:
 		int MeshType;
 	UPROPERTY(EditAnywhere)
 		int ActionType;
-
+	UPROPERTY(EditAnywhere)
+		AActor* player;
 };

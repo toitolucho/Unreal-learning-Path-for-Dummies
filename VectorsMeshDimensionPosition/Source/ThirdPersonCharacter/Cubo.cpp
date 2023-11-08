@@ -4,6 +4,7 @@
 #include "Cubo.h"
 #include <GameFramework/CharacterMovementComponent.h>
 #include <Animation/AnimNode_Inertialization.h>
+#include "ThirdPersonCharacterGameMode.h"
 
 // Sets default values
 ACubo::ACubo()
@@ -20,7 +21,7 @@ ACubo::ACubo()
 	deltaMov = 0.5;
 	deltaScale = 1.005;
 	deltaRot = 1;
-
+	enabled = false;
 	
 }
 
@@ -40,6 +41,14 @@ void ACubo::BeginPlay()
 	CurrentTargetPoint = TargetPoint2;
 	UE_LOG(LogActor, Warning, TEXT("Updated Rotation of Actor %s"), *this->GetActorRotation().ToString());
 	UE_LOG(LogActor, Warning, TEXT("After Scale %s"), *this->GetActorRelativeScale3D().ToString());
+
+	AThirdPersonCharacterGameMode* GameMode = (AThirdPersonCharacterGameMode*)GetWorld()->GetAuthGameMode();
+	UClass* DefaultPawnClass = GameMode->DefaultPawnClass;
+	//DefaultPawnClass->
+	//GameMode->GetDefaultPawnClassForController();
+	// 
+	// 
+	// 
 	//FRotator CurrentRotation = GetActorRotation();
 	//CurrentRotation.Pitch, CurrentRotation.Yaw + deltaRot, CurrentRotation.Roll	
 
@@ -177,13 +186,21 @@ void ACubo::Tick(float DeltaTime)
 	////previusLocation.Y = previusLocation.Y + 0.1;
 	//SetActorLocation(previusLocation);
 
-
+	if (enabled)
+	{
+		if (ActionType == 1)
+			moverHacia(DeltaTime);
+		else if (ActionType == 2)
+			escalarHacia(DeltaTime);
+		else if (ActionType == 3)
+			Rotarhacia(DeltaTime);
+	}
 	
-	if(ActionType == 1)
-		moverHacia(DeltaTime);
-	else if (ActionType == 2)
-		escalarHacia(DeltaTime);
-	else if (ActionType == 3)
-		Rotarhacia(DeltaTime);
+	
+}
+
+void ACubo::iniciarMovimiento()
+{
+	enabled = true;
 }
 
